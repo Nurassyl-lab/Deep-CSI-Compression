@@ -293,39 +293,3 @@ We end up with this performances.
 | model 2 | 0.1198 | 0.0918 | 0.1125 |
 | model 3 | 0.1271 | 0.1085 | 0.1001 |
 
-# Analysis of VAE encoder data.
-
-(Application of this part will be explained in "Setup section")
-
-`z` is generated encoded features (output of vae encoder model).
-
-Information of encoded features of data with heterogeneity 10%.
-
-`im_mean`, `im_log_var`, `rl_mean`, and `rl_log_var` are outputs of vae model
-`im_z_var`, `im_z_mean`, and `rl_z_var`, `rl_z_mean` are manually computed from `z`, using `np.var` and `np.mean` functions.
-![data4](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/encoder_analysis_het10.png)
-
-
-
-Information of encoded features of data with heterogeneity 50%.
-
-Label name desciription: M#D# -> M#-model_number, D#-data_number. (EX: M1D0 means that these results were obrained using model 1 on dataset of class 0) 
-
-<img src=https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/grid.png width="500"/>
-
-For this case the compression rate was 99.375%.
-
-### Setup 1: UE selection
-As for now only [setup 1] is available.
-In this case pre-trained encoders are delivered to UE. When UE receives signal that it needs to send to BS the following algorithm is being executed under setup 1. 
-UE compresses input using all 3 encoders that it has received. Now UE has 3 different encoded features of
-
-
-main2 python code smaller copy of the main file which is not yet included in this repository.
-You can use main2 to get familiar with our setup and etc.
-
-Right now i'm still running simulations, I will add more infomation regarding this project later.
-
-# My observations
----
-Graveyard of failed ideas. 

@@ -1,3 +1,7 @@
+'''
+This script is written as an example of how to split data into different classes with different heterogeneity levels.
+'''
+
 # In[1]
 'CSI data split'
 import numpy as np

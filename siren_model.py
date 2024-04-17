@@ -1,5 +1,6 @@
 '''
     Modified Siren Model
+    With More parameters
 '''
 from keras.layers import Layer
 import tensorflow as tf

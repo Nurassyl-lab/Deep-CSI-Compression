@@ -1,8 +1,5 @@
 This repository was made to store a reproducible examples for the paper "Harnessing Heterogeneity: Personalized Deep CSI Compression in Wireless Networks"!
 
-Due to a "force majeure" authors were unable to update this repository. Will finish during February of 2024
-
-Not finished yet!!!
 DATASET will be added soon
 
 The repo may not be well organized. This is my first big project the file management is a bit chaotic ;(

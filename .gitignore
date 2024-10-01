@@ -6,3 +6,4 @@
 ./~.un~
 plots/
 exclude.txt
+*.npy

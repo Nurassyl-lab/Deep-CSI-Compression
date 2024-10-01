@@ -3,7 +3,7 @@ This repository was made to store a reproducible examples for the paper "Harness
 The repo may not be well organized. This is my first big project the file management is a bit chaotic ;(
 
 # Content:
-  1) Introduction
+  1) Introduction and How to RUN
   2) CSI dataset
   3) Code description
   4) Variational Autoencoder
@@ -16,6 +16,38 @@ The repo may not be well organized. This is my first big project the file manage
 ---
 Implementation of **Federated Learning** (a.k.a collaborative learning) for **CSI data** transmission between UE (user equipment) and BS (base station).
 **Federated learning** is a subpart of AI and Machine learning where the **Central model** (also refered as server model) is trained/improved using local (decentralized models) `user` models. Several implementations of Fed. learning is Amazon Alexa, Apple Siri, Google Keyboard and etc.
+
+# How to run
+
+1. Install torch: [PyTorch Installation](https://pytorch.org/get-started/locally/)
+2. `pip install -r requirements.txt`
+3. Create Dataset: `python data_pre_processing/dataset_generator.py`
+4. Split dataset: `python data_pre_processing/dataset_splitter.py --dataset dataset.csv --clustering SNR`
+5. Run the autoencoder:
+    - training: `./execute.sh -d SNR_biased_100_1_dataset.csv -m CNN_het100_class1 -n 10 -p train --limit 20000`
+    - inference: `./execute.sh -d SNR_biased_100_1_dataset.csv -m CNN_het100_class1 -p test`
+6. Run the SN dataset creation: `python data_pre_processing/dataset_sn.py --model SIREN --epoch 38  --het 100 --datasets "SNR_biased_100_1_dataset.csv, SNR_biased_100_2_dataset.csv, SNR_biased_100_3_dataset.csv"` or `train_sn.py`
+
+# Dataset
+
+with a dataset size = 120,000 and clustered into 3 classes, there are:
+56837 samples for 1 class
+26343 samples for 2 class
+36820 samples for 3 class
+
+# Ignore
+- Everything that has `RealImag` in it is deletable.
+
+# For RealImag
+
+- Prepare datasets: `python dataset_generator_RealImag.py`
+- Train a model: `python autoencoder_train_test_RealImag.py --model CNN --dataset_train dataset_RealImag_train.csv --dataset_test dataset_RealImag_test.csv --dataset_val dataset_RealImag_val.csv --process train`
+- Use `chech_dataset_het.py` to verify that your dataloader is biased
+- Train a model on biased dataset: `python autoencoder_train_test_RealImag.py --model CNN_het100_class1 --dataset_train dataset_RealImag_train.csv --dataset_test dataset_RealImag_test.csv --dataset_val dataset_RealImag_val.csv --process train --het 1.0 --class 1`
+- Evaluate models across their their datasets: `python compare_autoencoders.py --model CNN --dataset_train dataset_RealImag_train.csv --dataset_test dataset_RealImag_test.csv --dataset_val dataset_RealImag_val.csv --het 1.0 --epoch 100 --n_class 3`
+- Train SN: `python train_sn.py --model CNN --dataset_train dataset_RealImag_train.csv --dataset_test dataset_RealImag_test.csv --dataset_val dataset_RealImag_val.csv  --n_class 3  --het 1.0 --epoch 100 --limit 45000`
+- Test pipeline: `python snap_pipeline_evaluate.py --model CNN --dataset_train dataset_RealImag_train.csv --dataset_test dataset_RealImag_test.csv --dataset_val dataset_RealImag_val.csv  --n_class 3  --het 1.0`
+- Train MoE: `python mixture_of_experts_train_test.py --dataset_train dataset_RealImag_train.csv --dataset_test dataset_RealImag_test.csv --dataset_val dataset_RealImag_val.csv --limit 15000 --purpose train` if you want to test it `--purpose test`
 
 # CSI dataset
 ---

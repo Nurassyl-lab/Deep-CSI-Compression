@@ -18,7 +18,7 @@ Implementation of **Federated Learning** (a.k.a collaborative learning) for **CS
 **Federated learning** is a subpart of AI and Machine learning where the **Central model** (also refered as server model) is trained/improved using local (decentralized models) `user` models. Several implementations of Fed. learning is Amazon Alexa, Apple Siri, Google Keyboard and etc.
 
 # How to run
-
+0. Download a dataset from `https://ieee-dataport.org/open-access/ultra-dense-indoor-mamimo-csi-dataset` and extract `DIS_lab_LoS` in `./`.
 1. Install torch: [PyTorch Installation](https://pytorch.org/get-started/locally/)
 2. `pip install -r requirements.txt`
 3. Create Dataset: `python data_pre_processing/dataset_generator.py`
